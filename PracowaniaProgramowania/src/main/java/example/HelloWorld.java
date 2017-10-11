@@ -9,9 +9,7 @@ public class HelloWorld {
     public static void main(String [ ] args) {
         System.out.println("Hello World");
 
-        logger.info("hej info");
-
-        logger.debug("hej debug");
+        logger.info("To już drugie zajęcia");
     }
 }
 
