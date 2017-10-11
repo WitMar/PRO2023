@@ -30,9 +30,9 @@
                                 </manifest>
                             </archive>
                             <descriptorRefs>
+                                <finalName>${project.artifactId}-${project.version}</finalName>
                                 <descriptorRef>jar-with-dependencies</descriptorRef>
                             </descriptorRefs>
-                            <finalName>${project.artifactId}-${project.version}</finalName>
                         </configuration>
                     </execution>
                 </executions>
