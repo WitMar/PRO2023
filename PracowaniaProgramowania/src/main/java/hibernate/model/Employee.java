@@ -1,6 +1,10 @@
 package hibernate.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -24,7 +28,34 @@ public class Employee {
     @Column(name = "PESEL", nullable = false, unique = true)
     private int pesel;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="Address_ID", referencedColumnName = "id")
+    Address address;
+
+    @ManyToMany(mappedBy = "subworkers", cascade = CascadeType.ALL)
+    private List<Employee> managers = new ArrayList<Employee>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Employee>  subworkers = new ArrayList<>();
+
+
     public Employee() {}
+
+    public List<Employee> getManagers() {
+        return managers;
+    }
+
+    public void setManagers(List<Employee> managers) {
+        this.managers = managers;
+    }
+
+    public List<Employee> getSubworkers() {
+        return subworkers;
+    }
+
+    public void setSubworkers(List<Employee> subworkers) {
+        this.subworkers = subworkers;
+    }
 
     public int getId() {
         return id;
@@ -64,5 +95,13 @@ public class Employee {
 
     public void setPesel(int pesel) {
         this.pesel = pesel;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

@@ -1,5 +1,6 @@
 package hibernate;
 
+import hibernate.model.Address;
 import hibernate.model.Employee;
 import hibernate.queries.Queries;
 
@@ -7,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -35,6 +37,25 @@ class Manager {
             emp.setSalary(100);
             emp.setPesel(new Random().nextInt());
 
+            Employee emp2 = new Employee();
+            emp2.setFirstName("Roman");
+            emp2.setLastName("Polak" + new Random().nextInt());
+            emp2.setSalary(100);
+            emp2.setPesel(new Random().nextInt());
+
+            entityManager.persist(emp2);
+
+            Address address = new Address();
+            address.setCity("poznan");
+            address.setStreet("poznanska");
+            address.setNr("1");
+            address.setPostcode("99090");
+
+            emp.setAddress(address);
+            emp2.setAddress(address);
+            emp.getSubworkers().add(emp2);
+
+            entityManager.persist(address);
             entityManager.persist(emp);
 
             Employee employee = entityManager.find(Employee.class, emp.getId());
@@ -66,7 +87,7 @@ class Manager {
     static void changeFirstGuyToNowak(EntityManager entityManager) {
 
         Query query = entityManager.createQuery("SELECT k FROM Employee k");
-        List<Employee> employees = new Queries(entityManager).getEmployeeByName("Nowak");
+        List<Employee> employees = new Queries(entityManager).getAllEmployeeByPage(1);
 
         employees.get(0).setLastName("NowakPRE" + new Random().nextInt());
 
