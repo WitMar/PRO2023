@@ -2,6 +2,7 @@ package hibernate.model;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "EMPLOYEE", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"first_name","last_name"})})

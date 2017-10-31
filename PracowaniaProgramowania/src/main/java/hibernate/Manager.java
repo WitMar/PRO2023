@@ -1,6 +1,7 @@
 package hibernate;
 
 import hibernate.model.Employee;
+import hibernate.queries.Queries;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -37,6 +38,11 @@ class Manager {
             entityManager.persist(emp);
 
             Employee employee = entityManager.find(Employee.class, emp.getId());
+            if (employee == null) {
+                System.out.println(emp.getId() + " not found! ");
+            } else {
+                System.out.println("Found " + employee);
+            }
 
             System.out.println("Employee " + employee.getId() + " " + employee.getFirstName() + employee.getLastName());
 
@@ -60,9 +66,9 @@ class Manager {
     static void changeFirstGuyToNowak(EntityManager entityManager) {
 
         Query query = entityManager.createQuery("SELECT k FROM Employee k");
-        List<Employee> employees = query.getResultList();
+        List<Employee> employees = new Queries(entityManager).getEmployeeByName("Nowak");
 
-        employees.get(2).setLastName("Nowak" + new Random().nextInt());
+        employees.get(0).setLastName("NowakPRE" + new Random().nextInt());
 
     }
 
