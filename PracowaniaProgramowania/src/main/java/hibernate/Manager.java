@@ -1,41 +1,69 @@
 package hibernate;
 
 import hibernate.model.Employee;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import java.util.List;
+import java.util.Random;
+
 
 class Manager {
 
     public static void main(String[] args) {
-        System.out.println("Hibernate one to one (Annotation)");
+
+        System.out.println("Start");
+
+        EntityManager entityManager = null;
+
+        EntityManagerFactory entityManagerFactory = null;
 
         try {
-            // Create the SessionFactory from hibernate.cfg.xml
-            SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-            Session session = sessionFactory.openSession();
-            session.beginTransaction();
 
-            Employee employee = new Employee();
+            entityManagerFactory = Persistence.createEntityManagerFactory("hibernate-dynamic");
 
-            employee.setFirstName("Jan");
-            employee.setLastName("Polak");
-            employee.setSalary(100);
+            entityManager = entityManagerFactory.createEntityManager();
 
-            session.save(employee);
+            entityManager.getTransaction().begin();
 
-            employee.setPesel(1010);
-            session.save(employee);
+            Employee emp = new Employee();
+            emp.setFirstName("Jan");
+            emp.setLastName("Polak" + new Random().nextInt());
+            emp.setSalary(100);
+            emp.setPesel(new Random().nextInt());
 
-            session.getTransaction().commit();
+            entityManager.persist(emp);
+
+            Employee employee = entityManager.find(Employee.class, emp.getId());
+
+            System.out.println("Employee " + employee.getId() + " " + employee.getFirstName() + employee.getLastName());
+
+            changeFirstGuyToNowak(entityManager);
+
+            entityManager.getTransaction().commit();
 
             System.out.println("Done");
+
+            entityManager.close();
 
         } catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed
             System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
+        } finally {
+            entityManagerFactory.close();
         }
 
     }
+
+    static void changeFirstGuyToNowak(EntityManager entityManager) {
+
+        Query query = entityManager.createQuery("SELECT k FROM Employee k");
+        List<Employee> employees = query.getResultList();
+
+        employees.get(2).setLastName("Nowak" + new Random().nextInt());
+
+    }
+
 }
