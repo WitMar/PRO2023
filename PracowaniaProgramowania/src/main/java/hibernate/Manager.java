@@ -31,20 +31,24 @@ class Manager {
 
             entityManager.getTransaction().begin();
 
+            //add 1
             Employee emp = new Employee();
             emp.setFirstName("Jan");
             emp.setLastName("Polak" + new Random().nextInt());
             emp.setSalary(100);
             emp.setPesel(new Random().nextInt());
 
+            //add 2
             Employee emp2 = new Employee();
             emp2.setFirstName("Roman");
             emp2.setLastName("Polak" + new Random().nextInt());
             emp2.setSalary(100);
             emp2.setPesel(new Random().nextInt());
 
+            //save 2
             entityManager.persist(emp2);
 
+            //add address
             Address address = new Address();
             address.setCity("poznan");
             address.setStreet("poznanska");
@@ -84,6 +88,7 @@ class Manager {
 
     }
 
+    // read a page of empleyees and change first one to Nowak
     static void changeFirstGuyToNowak(EntityManager entityManager) {
 
         Query query = entityManager.createQuery("SELECT k FROM Employee k");
