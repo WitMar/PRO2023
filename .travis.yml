@@ -1,1 +1,2 @@
+before_script: cd PracowniaProgramowania
 language: java
