@@ -66,7 +66,7 @@ class Manager {
     static void changeFirstGuyToNowak(EntityManager entityManager) {
 
         Query query = entityManager.createQuery("SELECT k FROM Employee k");
-        List<Employee> employees = new Queries(entityManager).getEmployeeByName("Nowak");
+        List<Employee> employees = new Queries(entityManager).getEmployeeByName("Polak");
 
         employees.get(0).setLastName("NowakPRE" + new Random().nextInt());
 

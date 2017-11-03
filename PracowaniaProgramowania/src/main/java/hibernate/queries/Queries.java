@@ -17,6 +17,6 @@ public class Queries {
     public List<Employee> getEmployeeByName(String name) {
         TypedQuery<Employee> query = entityManager.createQuery(
                 "SELECT c FROM Employee c WHERE c.lastName LIKE :name", Employee.class);
-        return query.setParameter("name", name).getResultList();
+        return query.setParameter("name", "%" + name + "%").getResultList();
     }
 }
