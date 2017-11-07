@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.Assert.*;
 
-public class JsonSerializationTest {
+public class GsonSerializationTest {
 
     Gson gson = new Gson();
 

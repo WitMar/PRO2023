@@ -1,19 +1,15 @@
 package pl.edu.amu.pracprog;
 
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import org.apache.log4j.Logger;
 import com.google.gson.Gson;
 import pl.edu.amu.pracprog.music.*;
 
-import java.lang.reflect.Type;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collection;
 
-public class JsonSerialization {
+public class GsonSerialization {
 
-    final static Logger logger = Logger.getLogger(JsonSerialization.class);
+    final static Logger logger = Logger.getLogger(GsonSerialization.class);
 
 
     public static void printJson(){
