@@ -1,9 +1,11 @@
-package com.ensat.services;
+package com.pracownia.spring.services;
 
-import com.ensat.entities.Product;
-import com.ensat.repositories.ProductRepository;
+import com.pracownia.spring.entities.Product;
+import com.pracownia.spring.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * Product service implement.
@@ -37,5 +39,14 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(Integer id) {
         productRepository.delete(id);
     }
+
+    @Override
+    public Boolean checkIfExist(Integer id) {
+        if (productRepository.checkIfExist(id) > 0)
+            return true;
+        else
+            return false;
+    }
+
 
 }

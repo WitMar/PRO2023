@@ -1,6 +1,7 @@
-package com.ensat.services;
+package com.pracownia.spring.services;
 
-import com.ensat.entities.Product;
+import com.pracownia.spring.entities.Product;
+import java.util.Optional;
 
 public interface ProductService {
 
@@ -11,5 +12,7 @@ public interface ProductService {
     Product saveProduct(Product product);
 
     void deleteProduct(Integer id);
+
+    Boolean checkIfExist(Integer id);
 
 }
