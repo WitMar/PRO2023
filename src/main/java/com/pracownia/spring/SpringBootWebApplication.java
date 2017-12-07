@@ -24,22 +24,6 @@ public class SpringBootWebApplication extends SpringBootServletInitializer {
         return application.sources(SpringBootWebApplication.class);
     }
 
-    @Bean
-    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
-        MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        jsonConverter.setObjectMapper(objectMapper);
-        return jsonConverter;
-    }
-
-    @Bean
-    public Docket productApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select().apis(RequestHandlerSelectors.basePackage("com.pracownia.spring.controllers"))
-                .build();
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(SpringBootWebApplication.class, args);
     }
