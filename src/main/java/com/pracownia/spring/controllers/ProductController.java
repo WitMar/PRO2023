@@ -63,7 +63,7 @@ public class ProductController {
     public ResponseEntity<Product> create(@RequestBody @Valid @NotNull Product product) {
         product.setProductId(UUID.randomUUID().toString());
         productService.saveProduct(product);
-        return ResponseEntity.ok().body(product);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 
