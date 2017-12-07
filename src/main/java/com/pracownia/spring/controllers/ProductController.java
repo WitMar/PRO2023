@@ -85,7 +85,7 @@ public class ProductController {
      * Delete product by its id.
      *
      */
-    @RequestMapping(value PO= "/product/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.DELETE)
     public RedirectView delete(@PathVariable Integer id) {
         productService.deleteProduct(id);
         return new RedirectView("/api/products", true);
