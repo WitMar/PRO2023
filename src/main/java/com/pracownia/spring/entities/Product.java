@@ -1,7 +1,11 @@
 package com.pracownia.spring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,6 +14,8 @@ import java.util.Set;
  * Product entity.
  */
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,
+        property="refId", scope=Product.class)
 public class Product {
 
     @Id
@@ -25,13 +31,9 @@ public class Product {
     @Column
     private BigDecimal price;
 
-    @ManyToMany
-    @JoinColumn(name = "seller_id")
-    private Set<Seller> employees = new HashSet<>();
-
-    @ManyToOne
-    @JoinColumn(name = "producer_id")
-    Producer producer;
+    @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.PERSIST,  CascadeType.REMOVE})
+    @JoinTable(name = "product_selles")
+    private Set<Seller> sellers = new HashSet<>();
 
     //required by Hibernate
     public Product(){
@@ -76,4 +78,11 @@ public class Product {
         this.price = price;
     }
 
+    public Set<Seller> getSellers() {
+        return sellers;
+    }
+
+    public void setSellers(Set<Seller> sellers) {
+        this.sellers = sellers;
+    }
 }

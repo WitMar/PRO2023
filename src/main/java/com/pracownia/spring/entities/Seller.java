@@ -14,20 +14,25 @@ public class Seller {
     private int id;
 
     @Column
-    String name;
+    private String name;
 
     @Column
-    String city;
+    private String city;
 
-    @OneToMany
-    List<Product> products = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "products")
+    @Column(name = "product_id")
+    private List<String> products = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy="sellers")
+    private List<Product> productsOb;
 
     //required by Hibernate
     public Seller(){
 
     }
 
-    public Seller(String name, String city, List<Product> products) {
+    public Seller(String name, String city, List<String> products) {
         this.name = name;
         this.city = city;
         this.products = products;
@@ -57,12 +62,11 @@ public class Seller {
         this.city = city;
     }
 
-    public List<Product> getProducts() {
+    public List<String> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(List<String> products) {
         this.products = products;
     }
-
 }
