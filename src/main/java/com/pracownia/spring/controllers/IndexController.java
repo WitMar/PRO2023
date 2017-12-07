@@ -19,12 +19,8 @@ import java.util.UUID;
 @RequestMapping("/")
 public class IndexController {
 
-    private ProductService productService;
-
     @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
-    }
+    private ProductService productService;
 
     @RequestMapping("")
     String index() {

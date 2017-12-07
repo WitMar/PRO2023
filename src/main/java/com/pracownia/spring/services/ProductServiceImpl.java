@@ -13,12 +13,8 @@ import java.util.Optional;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private ProductRepository productRepository;
-
     @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    private ProductRepository productRepository;
 
     @Override
     public Iterable<Product> listAllProducts() {

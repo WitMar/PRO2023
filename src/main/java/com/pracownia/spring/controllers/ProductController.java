@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
@@ -24,12 +24,9 @@ import java.util.UUID;
 @RequestMapping("/api")
 public class ProductController {
 
+    @Autowired
     private ProductService productService;
 
-    @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
-    }
 
     /**
      * List all products.
@@ -63,10 +60,10 @@ public class ProductController {
      *
      */
     @RequestMapping(value = "/product", method = RequestMethod.POST)
-    public ResponseEntity<Void> create(@RequestBody @Valid @NotNull Product product) {
+    public ResponseEntity<Product> create(@RequestBody @Valid @NotNull Product product) {
         product.setProductId(UUID.randomUUID().toString());
         productService.saveProduct(product);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity.ok().body(product);
     }
 
 
@@ -88,7 +85,7 @@ public class ProductController {
      * Delete product by its id.
      *
      */
-    @RequestMapping("/product/{id}")
+    @RequestMapping(value PO= "/product/{id}", method = RequestMethod.DELETE)
     public RedirectView delete(@PathVariable Integer id) {
         productService.deleteProduct(id);
         return new RedirectView("/api/products", true);
