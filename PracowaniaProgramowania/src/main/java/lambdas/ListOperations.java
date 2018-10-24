@@ -94,14 +94,12 @@ public class ListOperations {
         emp.setLastName("Adamski" + new Random().nextInt());
         emp.setSalary(10);
         emp.setPesel(Math.abs(new Random().nextInt()));
-        emp.setBirth(DateTime.now());
 
         Employee emp2 = new Employee();
         emp2.setFirstName("Bob");
         emp2.setLastName("Dylan" + new Random().nextInt());
         emp2.setSalary(1000);
         emp2.setPesel(Math.abs(new Random().nextInt()));
-        emp2.setBirth(DateTime.now().minusMonths(100));
 
         //add address
         Address address = new Address();

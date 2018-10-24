@@ -41,6 +41,10 @@ public class JacksonSerialization {
         System.out.println(modifiedJsonString);
     }
 
+    public static void serializeListDemo(ObjectMapper mapper, String fileSuffix) throws IOException {
+
+    }
+
     public static void deserializeDemo(ObjectMapper mapper, String fileSuffix) throws IOException {
         //Deserialized employee object from employees.* file in resources
         InputStream employeeIs = JacksonSerialization.class.getClassLoader().
