@@ -1,43 +1,25 @@
-package hibernate.model;
+package model;
 
-import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-
-@Entity
-@Table(name = "EMPLOYEE", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"first_name","last_name"})})
 public class Employee {
 
-    @Id @GeneratedValue
-    @Column(name = "id")
     private int id;
 
-    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "salary")
     private int salary;
 
-    @Column(name = "PESEL", nullable = false, unique = true)
     private int pesel;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="Address_ID", referencedColumnName = "id")
     Address address;
 
-    @ManyToMany(mappedBy = "subworkers", cascade = CascadeType.ALL)
-    private List<Employee> managers = new ArrayList<Employee>();
+    private List<Employee> managers = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
     private List<Employee>  subworkers = new ArrayList<>();
-
 
     public Employee() {}
 

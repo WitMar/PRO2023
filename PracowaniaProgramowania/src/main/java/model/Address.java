@@ -1,30 +1,17 @@
-package hibernate.model;
+package model;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "ADDRESSES")
 public class Address {
 
-    @Id
-    @GeneratedValue(generator = "gen")
-    @SequenceGenerator(name="gen", sequenceName = "author_seq")
-    @Column(name = "id")
     private int id;
 
-    @Column(nullable = false)
     String street;
 
-    @Column(nullable = false)
     String city;
 
-    @Column(length = 5, nullable = false)
     String nr;
 
-    @Column(length = 5)
     String housenr;
 
-    @Column(length = 5, nullable = false)
     String postcode;
 
     public int getId() {

@@ -1,7 +1,7 @@
 package pl.edu.amu.pracprog;
 
-import hibernate.model.Address;
-import hibernate.model.Employee;
+import model.Address;
+import model.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +57,8 @@ public class ModelObjectsCreator {
         emp.setAddress(address);
         emp2.setAddress(address);
         emp.getSubworkers().add(emp2);
+        //This will give us infinite recursion
+        //emp2.getManagers().add(emp);
 
         employees = new ArrayList<Employee>();
         employees.add(emp);

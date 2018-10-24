@@ -1,20 +1,13 @@
 package pl.edu.amu.pracprog;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import hibernate.model.Employee;
+import model.Employee;
 import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
-import java.util.Random;
-
-import static pl.edu.amu.pracprog.JacksonSerialization.deserializeDemo;
 
 public class JacksonSerialization {
 
@@ -52,10 +45,16 @@ public class JacksonSerialization {
         //Deserialized employee object from employees.* file in resources
         InputStream employeeIs = JacksonSerialization.class.getClassLoader().
                 getResourceAsStream("employee." + fileSuffix);
+
+        //Read value - set class type of serialization
         Employee deserializedEmployee = mapper.readValue(employeeIs, Employee.class);
-        deserializedEmployee.setSalary(new Random().nextInt(100000));
+
+        //Give eployee big salary
+        deserializedEmployee.setSalary(100000);
+
         String modifiedSerialzied = mapper.writeValueAsString(deserializedEmployee);
         logger.info("Printing modified re-serialized employee to" + fileSuffix);
+
         System.out.println(modifiedSerialzied);
     }
 
