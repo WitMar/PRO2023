@@ -1,6 +1,7 @@
 package hibernate.model;
 
 import javax.persistence.*;
+import java.util.Random;
 
 
 @Entity
@@ -64,5 +65,15 @@ public class Employee {
 
     public void setPesel(int pesel) {
         this.pesel = pesel;
+    }
+
+    public static Employee copyEmployee(Employee emp) {
+        Employee person = new Employee();
+        //person.setAddress(emp.getAddress());
+        person.setLastName(emp.getLastName());
+        person.setFirstName(emp.getFirstName());
+        person.setPesel(new Random().nextInt());
+        person.setSalary(emp.getSalary());
+        return person;
     }
 }
