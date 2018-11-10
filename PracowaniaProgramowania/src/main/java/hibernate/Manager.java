@@ -3,10 +3,7 @@ package hibernate;
 import hibernate.model.Employee;
 import hibernate.queries.Queries;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Random;
 
@@ -23,6 +20,7 @@ class Manager {
 
         try {
 
+            // FACTORY NAME HAS TO MATCHED THE ONE FROM PERSISTED.XML !!!
             entityManagerFactory = Persistence.createEntityManagerFactory("hibernate-dynamic");
 
             entityManager = entityManagerFactory.createEntityManager();
@@ -65,7 +63,6 @@ class Manager {
 
     static void changeFirstGuyToNowak(EntityManager entityManager) {
 
-        Query query = entityManager.createQuery("SELECT k FROM Employee k");
         List<Employee> employees = new Queries(entityManager).getEmployeeByName("Polak");
 
         employees.get(0).setLastName("NowakPRE" + new Random().nextInt());

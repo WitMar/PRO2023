@@ -6,14 +6,14 @@
     <persistence-unit name="hibernate-dynamic" transaction-type="RESOURCE_LOCAL">
         <properties>
             <!-- Configuring JDBC properties -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://psql.wmi.amu.edu.pl:5432/mw?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
-            <property name="javax.persistence.jdbc.user" value="mw"/>
-            <property name="javax.persistence.jdbc.password" value="riustsdardswify"/>
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:PRA"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
 
             <!-- Hibernate properties -->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.format_sql" value="false"/>
             <property name="hibernate.show_sql" value="true"/>
 
