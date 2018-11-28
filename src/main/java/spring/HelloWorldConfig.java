@@ -8,9 +8,4 @@ public class HelloWorldConfig {
     public HelloWorld helloWorld(){
         return new HelloWorld();
     }
-
-    @Bean
-    public Printer printer(){
-        return new Printer();
-    }
 }
