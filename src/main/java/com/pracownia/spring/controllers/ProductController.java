@@ -10,6 +10,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -28,12 +29,20 @@ public class ProductController {
     private ProductService productService;
 
 
+
     /**
      * List all products.
      *
      */
     @RequestMapping(value = "/products", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Product> list(Model model) {
+        return productService.listAllProducts();
+    }
+
+    // Only for redirect!
+    @ApiIgnore
+    @RequestMapping(value = "/products", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<Product> redirect(Model model) {
         return productService.listAllProducts();
     }
 
