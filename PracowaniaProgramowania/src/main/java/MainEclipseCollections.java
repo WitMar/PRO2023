@@ -1,3 +1,4 @@
+import com.sun.xml.internal.bind.v2.TODO;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.impl.block.factory.MultimapFunctions;
@@ -20,6 +21,7 @@ public class MainEclipseCollections {
     }
 
     public static MutableListMultimap<Boolean, Person> partitionAdults(List<Person> collection) {
-        return collection.stream().collect(Collectors2.toListMultimap(p -> p.getAge() > 18, p -> p));
+        // ToDo
+        return null;
     }
 }

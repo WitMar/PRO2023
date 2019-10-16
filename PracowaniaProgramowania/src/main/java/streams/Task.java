@@ -22,9 +22,8 @@ public class Task {
     }
 
     public static List<String> toUpperCase(List<String> collection) {
-        return collection.stream() // Convert collection to Stream
-                .map(String::toUpperCase) // Convert each element to upper case
-                .collect(toList()); // Collect results to a new list
+        // ToDo
+        return null;
     }
 
     public static Person getOldestPersonOldJava(List<Person> people) {
@@ -38,9 +37,8 @@ public class Task {
     }
 
     public static Person getOldestPerson(List<Person> people) {
-        return people.stream() // Convert collection to Stream
-                .max(Comparator.comparing(Person::getAge)) // Compares people ages
-                .get(); // Gets stream result
+        // ToDo
+        return null;
     }
 
     public static Map<Boolean, List<Person>> partitionAdultsOldJava(List<Person> people) {
@@ -54,8 +52,8 @@ public class Task {
     }
 
     public static Map<Boolean, List<Person>> partitionAdults(List<Person> people) {
-        return people.stream() // Convert collection to Stream
-                .collect(partitioningBy(p -> p.getAge() >= 18)); // Partition stream of people into adults (age => 18) and kids
+        // ToDo
+        return null;
     }
 
     public static List<String> transformOldJava(List<String> collection) {
@@ -69,9 +67,8 @@ public class Task {
     }
 
     public static List<String> transform(List<String> collection) {
-        return collection.stream() // Convert collection to Stream
-                .filter(value -> value.length() < 4) // Filter elements with length smaller than 4 characters
-                .collect(toList()); // Collect results to a new list
+        // ToDo
+        return null;
     }
 
     public static Map<String,Person> createMapOldJava(List<Person> collection) {
@@ -83,8 +80,8 @@ public class Task {
     }
 
     public static Map<String,Person> createMap(List<Person> collection) {
-        return collection.stream() // Convert collection to Stream
-                  .collect(Collectors.toMap(p -> p.getName(), Function.identity())); // Collect results to a new list
+        // ToDo
+        return null;
     }
 
 
@@ -99,9 +96,8 @@ public class Task {
     }
 
     public static List<String> transformList(List<List<String>> collection) {
-        return collection.stream() // Convert collection to Stream
-                .flatMap(value -> value.stream()) // Replace list with stream
-                .collect(toList()); // Collect results to a new list
+        // ToDo
+        return null;
     }
 
 
