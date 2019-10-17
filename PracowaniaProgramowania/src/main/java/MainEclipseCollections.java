@@ -1,13 +1,8 @@
-import com.sun.xml.internal.bind.v2.TODO;
-import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
-import org.eclipse.collections.impl.block.factory.MultimapFunctions;
-import org.eclipse.collections.impl.collector.Collectors2;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import streams.model.Person;
 
 import java.util.List;
-import java.util.Map;
 
 public class MainEclipseCollections {
 
