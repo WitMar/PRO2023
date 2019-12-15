@@ -28,8 +28,6 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-
-
     /**
      * List all products.
      *
