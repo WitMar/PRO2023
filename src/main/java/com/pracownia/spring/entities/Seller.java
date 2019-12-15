@@ -1,10 +1,15 @@
 package com.pracownia.spring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+//@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class,
+//        property="refSelId", scope=Seller.class)
 public class Seller {
 
     @Id
@@ -26,6 +31,14 @@ public class Seller {
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy="sellers")
     private List<Product> productsOb;
+
+    public List<Product> getProductsOb() {
+        return productsOb;
+    }
+
+    public void setProductsOb(List<Product> productsOb) {
+        this.productsOb = productsOb;
+    }
 
     //required by Hibernate
     public Seller(){

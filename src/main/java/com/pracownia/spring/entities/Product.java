@@ -14,8 +14,8 @@ import java.util.Set;
  * Product entity.
  */
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,
-        property="refId", scope=Product.class)
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,
+//        property="refId", scope=Product.class)
 public class Product {
 
     @Id
@@ -31,8 +31,10 @@ public class Product {
     @Column
     private BigDecimal price;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.PERSIST,  CascadeType.REMOVE})
-    @JoinTable(name = "product_selles")
+    @Column
+    private ZonedDateTime bestBeforeDate;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Set<Seller> sellers = new HashSet<>();
 
     //required by Hibernate
@@ -40,10 +42,11 @@ public class Product {
 
     }
 
-    public Product(String productId, String name, BigDecimal price) {
+    public Product(String productId, String name, BigDecimal price, ZonedDateTime date) {
         this.productId = productId;
         this.name = name;
         this.price = price;
+        this.bestBeforeDate = date;
     }
 
     public String getName() {
@@ -76,6 +79,14 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public ZonedDateTime getBestBeforeDate() {
+        return bestBeforeDate;
+    }
+
+    public void setBestBeforeDate(ZonedDateTime bestBeforeDate) {
+        this.bestBeforeDate = bestBeforeDate;
     }
 
     public Set<Seller> getSellers() {
