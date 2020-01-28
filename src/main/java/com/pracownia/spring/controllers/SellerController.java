@@ -1,8 +1,6 @@
 //package com.pracownia.spring.controllers;
 //
-//import com.pracownia.spring.entities.Product;
 //import com.pracownia.spring.entities.Seller;
-//import com.pracownia.spring.services.ProductService;
 //import com.pracownia.spring.services.SellerService;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.http.HttpStatus;
@@ -18,7 +16,7 @@
 //import javax.validation.constraints.NotNull;
 //import java.util.List;
 //import java.util.Objects;
-//import java.util.UUID;
+//import java.util.Optional;
 //
 //@RestController
 //@RequestMapping("/api")
@@ -41,7 +39,7 @@
 //
 //    @RequestMapping(value = "/seller/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_ATOM_XML_VALUE)
 //    @ResponseBody
-//    public Seller getByPublicId(@PathVariable("id") Integer publicId) {
+//    public Optional<Seller> getByPublicId(@PathVariable("id") Integer publicId) {
 //        return sellerService.getSellerById(publicId);
 //    }
 //
@@ -53,7 +51,7 @@
 //
 //    @RequestMapping(value = "/seller", method = RequestMethod.PUT)
 //    public ResponseEntity<Void> edit(@RequestBody @Valid @NotNull Seller seller) {
-//            Seller sellerFromData = sellerService.getSellerById(seller.getId());
+//            Optional<Seller> sellerFromData = sellerService.getSellerById(seller.getId());
 //            if(Objects.nonNull(sellerFromData)) {
 //                sellerService.saveSeller(seller);
 //                return new ResponseEntity<>(HttpStatus.CREATED);
@@ -78,7 +76,7 @@
 //    }
 //
 //    @RequestMapping(value = "/seller/best", method = RequestMethod.GET)
-//    public Seller getBestSeller() {
+//    public Optional<Seller> getBestSeller() {
 //        return sellerService.getBestSeller();
 //    }
 //}

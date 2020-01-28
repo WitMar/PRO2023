@@ -1,15 +1,15 @@
 //package com.pracownia.spring.services;
 //
-//import com.pracownia.spring.entities.Product;
 //import com.pracownia.spring.entities.Seller;
 //
 //import java.util.List;
+//import java.util.Optional;
 //
 //public interface SellerService {
 //
 //    Iterable<Seller> listAllSellers();
 //
-//    Seller getSellerById(Integer id);
+//    Optional<Seller> getSellerById(Integer id);
 //
 //    Seller saveSeller(Seller seller);
 //
@@ -19,5 +19,5 @@
 //
 //    Integer getNumberOfProducts(Integer id);
 //
-//    Seller getBestSeller();
+//    Optional<Seller> getBestSeller();
 //}

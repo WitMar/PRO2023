@@ -7,8 +7,8 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
 //
-//import java.math.BigDecimal;
 //import java.util.List;
+//import java.util.Optional;
 //
 //@Service
 //public class SellerServiceImpl implements SellerService {
@@ -25,8 +25,8 @@
 //    }
 //
 //    @Override
-//    public Seller getSellerById(Integer id) {
-//        return sellerRepository.findOne(id);
+//    public Optional<Seller> getSellerById(Integer id) {
+//        return sellerRepository.findById(id);
 //    }
 //
 //    @Override
@@ -36,7 +36,7 @@
 //
 //    @Override
 //    public void deleteSeller(Integer id) {
-//        sellerRepository.delete(id);
+//        sellerRepository.deleteById(id);
 //    }
 //
 //    @Override
@@ -50,7 +50,7 @@
 //    }
 //
 //    @Override
-//    public Seller getBestSeller() {
+//    public Optional<Seller> getBestSeller() {
 //        double max = 0;
 //        int maxId = 0;
 //        Iterable<Seller> sellers = sellerRepository.findAll();
@@ -65,7 +65,7 @@
 //                maxId = s.getId();
 //            }
 //        }
-//        return sellerRepository.findOne(maxId);
+//        return sellerRepository.findById(maxId);
 //    }
 //
 //}
