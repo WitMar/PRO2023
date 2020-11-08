@@ -5,7 +5,7 @@ import fluentAPI.interfaces.Title;
 
 import java.util.stream.IntStream;
 
-public class PersonBuilderBuilder implements IPersonBuilder {
+public class PersonBuilder implements IPersonBuilder {
 
     Title title;
     String name;
