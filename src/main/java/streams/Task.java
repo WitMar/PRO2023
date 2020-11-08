@@ -6,8 +6,6 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.partitioningBy;
-import static java.util.stream.Collectors.toList;
 
 // Code from https://github.com/vfarcic/java-8-exercises
 
@@ -26,8 +24,10 @@ public class Task {
     }
 
     public static List<String> toUpperCase(List<String> collection) {
-        // ToDo
-        return null;
+        List<String> result = collection.stream()
+                .map(o -> o.toUpperCase())
+                .collect(Collectors.toList());
+        return result;
     }
 
     public static List<String> transformOldJava(List<String> collection) {
@@ -41,8 +41,10 @@ public class Task {
     }
 
     public static List<String> transform(List<String> collection) {
-        // ToDo
-        return null;
+        List<String> result = collection.stream()
+                .filter(o -> o.length() < 4)
+                .collect(Collectors.toList());
+        return result;
     }
 
     /**
@@ -58,8 +60,9 @@ public class Task {
     }
 
     public static Map<String,Person> createMap(List<Person> collection) {
-        // ToDo
-        return null;
+        Map<String, Person> result = collection.stream()
+                .collect(Collectors.toMap(p -> p.getName(), Function.identity()));
+        return result;
     }
 
 
@@ -74,8 +77,10 @@ public class Task {
     }
 
     public static Person getOldestPerson(List<Person> people) {
-        // ToDo
-        return null;
+        Person result = people.stream()
+                .sorted(Comparator.comparing(Person::getAge).reversed())
+                .findFirst().get();
+        return result;
     }
 
     /**
@@ -95,8 +100,9 @@ public class Task {
 
     // use partitionBy
     public static Map<Boolean, List<Person>> partitionAdults(List<Person> people) {
-        // ToDo
-        return null;
+        Map<Boolean, List<Person>> result = people.stream()
+                .collect(Collectors.partitioningBy(p -> p.getAge() > 18));
+        return result;
     }
 
     public static List<String> transformListOldJava(List<List<String>> collection) {
@@ -111,7 +117,9 @@ public class Task {
 
     //use flatMap
     public static List<String> transformList(List<List<String>> collection) {
-        // ToDo
-        return null;
+        List<String> result = collection.stream()
+                .flatMap(a -> a.stream())
+                .collect(Collectors.toList());
+        return result;
     }
 }

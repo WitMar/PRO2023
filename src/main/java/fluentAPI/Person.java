@@ -5,6 +5,7 @@ import fluentAPI.interfaces.Title;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class Person implements IPerson {
@@ -30,15 +31,23 @@ public class Person implements IPerson {
 
     @Override
     public IPerson sayHelloToFriends() {
-        // ToDo
+        this.friends.forEach(friend -> System.out.println("Hello " + friend.name));
         return this;
     }
 
     @Override
     public IPerson processFriends(Function<List<Person>, List<Person>> processor) {
-        processor.apply(this.friends);
+        List<Person> friends = processor.apply(this.friends);
+        System.out.println(friends.size());
         return this;
     }
+
+    @Override
+    public IPerson processFriendsInPlace(Consumer<List<Person>> consumer) {
+        consumer.accept(this.friends);
+        return this;
+    }
+
 
     @Override
     public IPerson chooseBestFriend(Function<List<Person>, Person> picker) {

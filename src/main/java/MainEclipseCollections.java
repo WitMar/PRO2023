@@ -1,4 +1,5 @@
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
+import org.eclipse.collections.impl.collector.Collectors2;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import streams.model.Person;
 
@@ -16,7 +17,6 @@ public class MainEclipseCollections {
     }
 
     public static MutableListMultimap<Boolean, Person> partitionAdults(List<Person> collection) {
-        // ToDo
-        return null;
+        return collection.stream().collect(Collectors2.toListMultimap(p -> p.getAge() > 18, p -> p));
     }
 }

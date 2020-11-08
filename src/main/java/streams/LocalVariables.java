@@ -15,6 +15,8 @@ public class LocalVariables {
             }
         });
 
+        System.out.println("---------");
+        i = 5;
         //Parallel execution of stream
 
         IntStream stream = IntStream.range(1, 100);
