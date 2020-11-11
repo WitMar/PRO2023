@@ -1,4 +1,5 @@
-import collections.MainEclipseCollections;
+package collections;
+
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.junit.Test;
 import streams.model.Human;

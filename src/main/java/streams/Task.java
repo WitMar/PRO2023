@@ -1,6 +1,6 @@
 package streams;
 
-import streams.model.Person;
+import streams.model.Human;
 
 import java.util.*;
 import java.util.function.Function;
@@ -51,34 +51,34 @@ public class Task {
      * MEDIUM
      */
 
-    public static Map<String,Person> createMapOldJava(List<Person> collection) {
-        Map<String,Person> people = new HashMap<>();
-        for (Person element : collection) {
+    public static Map<String,Human> createMapOldJava(List<Human> collection) {
+        Map<String,Human> people = new HashMap<>();
+        for (Human element : collection) {
             people.put(element.getName(), element);
         }
         return people;
     }
 
-    public static Map<String,Person> createMap(List<Person> collection) {
-        Map<String, Person> result = collection.stream()
+    public static Map<String,Human> createMap(List<Human> collection) {
+        Map<String, Human> result = collection.stream()
                 .collect(Collectors.toMap(p -> p.getName(), Function.identity()));
         return result;
     }
 
 
-    public static Person getOldestPersonOldJava(List<Person> people) {
-        Person oldestPerson = new Person("", 0);
-        for (Person person : people) {
-            if (person.getAge() > oldestPerson.getAge()) {
-                oldestPerson = person;
+    public static Human getOldestHumanOldJava(List<Human> people) {
+        Human oldestHuman = new Human("", 0);
+        for (Human person : people) {
+            if (person.getAge() > oldestHuman.getAge()) {
+                oldestHuman = person;
             }
         }
-        return oldestPerson;
+        return oldestHuman;
     }
 
-    public static Person getOldestPerson(List<Person> people) {
-        Person result = people.stream()
-                .sorted(Comparator.comparing(Person::getAge).reversed())
+    public static Human getOldestHuman(List<Human> people) {
+        Human result = people.stream()
+                .sorted(Comparator.comparing(Human::getAge).reversed())
                 .findFirst().get();
         return result;
     }
@@ -88,19 +88,19 @@ public class Task {
      */
 
 
-    public static Map<Boolean, List<Person>> partitionAdultsOldJava(List<Person> people) {
-        Map<Boolean, List<Person>> map = new HashMap<>();
+    public static Map<Boolean, List<Human>> partitionAdultsOldJava(List<Human> people) {
+        Map<Boolean, List<Human>> map = new HashMap<>();
         map.put(true, new ArrayList<>());
         map.put(false, new ArrayList<>());
-        for (Person person : people) {
+        for (Human person : people) {
             map.get(person.getAge() >= 18).add(person);
         }
         return map;
     }
 
     // use partitionBy
-    public static Map<Boolean, List<Person>> partitionAdults(List<Person> people) {
-        Map<Boolean, List<Person>> result = people.stream()
+    public static Map<Boolean, List<Human>> partitionAdults(List<Human> people) {
+        Map<Boolean, List<Human>> result = people.stream()
                 .collect(Collectors.partitioningBy(p -> p.getAge() > 18));
         return result;
     }
