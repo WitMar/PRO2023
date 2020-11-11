@@ -1,10 +1,11 @@
 package streams;
 
-import streams.model.Human;
+import streams.model.Person;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.partitioningBy;
 
 // Code from https://github.com/vfarcic/java-8-exercises
 
@@ -23,8 +24,10 @@ public class Task {
     }
 
     public static List<String> toUpperCase(List<String> collection) {
-        // ToDo
-        return null;
+        List<String> result = collection.stream()
+                .map(o -> o.toUpperCase())
+                .collect(Collectors.toList());
+        return result;
     }
 
     public static List<String> transformOldJava(List<String> collection) {
@@ -38,41 +41,46 @@ public class Task {
     }
 
     public static List<String> transform(List<String> collection) {
-        // ToDo
-        return null;
+        List<String> result = collection.stream()
+                .filter(o -> o.length() < 4)
+                .collect(Collectors.toList());
+        return result;
     }
 
     /**
      * MEDIUM
      */
 
-    public static Map<String, Human> createMapOldJava(List<Human> collection) {
-        Map<String, Human> people = new HashMap<>();
-        for (Human element : collection) {
+    public static Map<String,Person> createMapOldJava(List<Person> collection) {
+        Map<String,Person> people = new HashMap<>();
+        for (Person element : collection) {
             people.put(element.getName(), element);
         }
         return people;
     }
 
-    public static Map<String, Human> createMap(List<Human> collection) {
-        // ToDo
-        return null;
+    public static Map<String,Person> createMap(List<Person> collection) {
+        Map<String, Person> result = collection.stream()
+                .collect(Collectors.toMap(p -> p.getName(), Function.identity()));
+        return result;
     }
 
 
-    public static Human getOldestPersonOldJava(List<Human> people) {
-        Human oldestHuman = new Human("", 0);
-        for (Human human : people) {
-            if (human.getAge() > oldestHuman.getAge()) {
-                oldestHuman = human;
+    public static Person getOldestPersonOldJava(List<Person> people) {
+        Person oldestPerson = new Person("", 0);
+        for (Person person : people) {
+            if (person.getAge() > oldestPerson.getAge()) {
+                oldestPerson = person;
             }
         }
-        return oldestHuman;
+        return oldestPerson;
     }
 
-    public static Human getOldestPerson(List<Human> people) {
-        // ToDo
-        return null;
+    public static Person getOldestPerson(List<Person> people) {
+        Person result = people.stream()
+                .sorted(Comparator.comparing(Person::getAge).reversed())
+                .findFirst().get();
+        return result;
     }
 
     /**
@@ -80,20 +88,21 @@ public class Task {
      */
 
 
-    public static Map<Boolean, List<Human>> partitionAdultsOldJava(List<Human> people) {
-        Map<Boolean, List<Human>> map = new HashMap<>();
+    public static Map<Boolean, List<Person>> partitionAdultsOldJava(List<Person> people) {
+        Map<Boolean, List<Person>> map = new HashMap<>();
         map.put(true, new ArrayList<>());
         map.put(false, new ArrayList<>());
-        for (Human human : people) {
-            map.get(human.getAge() >= 18).add(human);
+        for (Person person : people) {
+            map.get(person.getAge() >= 18).add(person);
         }
         return map;
     }
 
     // use partitionBy
-    public static Map<Boolean, List<Human>> partitionAdults(List<Human> people) {
-        // ToDo
-        return null;
+    public static Map<Boolean, List<Person>> partitionAdults(List<Person> people) {
+        Map<Boolean, List<Person>> result = people.stream()
+                .collect(Collectors.partitioningBy(p -> p.getAge() > 18));
+        return result;
     }
 
     public static List<String> transformListOldJava(List<List<String>> collection) {
@@ -108,7 +117,9 @@ public class Task {
 
     //use flatMap
     public static List<String> transformList(List<List<String>> collection) {
-        // ToDo
-        return null;
+        List<String> result = collection.stream()
+                .flatMap(a -> a.stream())
+                .collect(Collectors.toList());
+        return result;
     }
 }

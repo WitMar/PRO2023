@@ -4,5 +4,6 @@ public enum Title {
     DR,
     MGR,
     PROF,
-    STUDENT
+    STUDENT,
+    PRESIDENT
 }

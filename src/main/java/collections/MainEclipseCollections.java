@@ -1,8 +1,7 @@
-package collections;
-
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
+import org.eclipse.collections.impl.collector.Collectors2;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
-import streams.model.Human;
+import streams.model.Person;
 
 import java.util.List;
 
@@ -17,8 +16,7 @@ public class MainEclipseCollections {
         citiesToPeople.get("Poznan").forEach(name -> System.out.println(name));
     }
 
-    public static MutableListMultimap<Boolean, Human> partitionAdults(List<Human> collection) {
-        // ToDo
-        return null;
+    public static MutableListMultimap<Boolean, Person> partitionAdults(List<Person> collection) {
+        return collection.stream().collect(Collectors2.toListMultimap(p -> p.getAge() > 18, p -> p));
     }
 }
