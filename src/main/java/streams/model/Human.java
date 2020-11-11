@@ -1,17 +1,17 @@
 package streams.model;
 
-public class Person {
+public class Human {
 
     private String name;
     private int age;
     private String nationality;
 
-    public Person(final String nameValue, final int ageValue) {
+    public Human(final String nameValue, final int ageValue) {
         name = nameValue;
         age = ageValue;
     }
 
-    public Person(final String nameValue, final int ageValue, final String nationalityValue) {
+    public Human(final String nameValue, final int ageValue, final String nationalityValue) {
         name = nameValue;
         age = ageValue;
         nationality = nationalityValue;

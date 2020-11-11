@@ -1,7 +1,7 @@
 package collections;
 
 import streams.Task;
-import streams.model.Person;
+import streams.model.Human;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -23,20 +23,20 @@ public class TaskTest {
 
     @Test
     public void getOldestPersonShouldReturnOldestPerson() {
-        Person sara = new Person("Sara", 4);
-        Person viktor = new Person("Viktor", 40);
-        Person eva = new Person("Eva", 42);
-        List<Person> collection = Arrays.asList(sara, eva, viktor);
+        Human sara = new Human("Sara", 4);
+        Human viktor = new Human("Viktor", 40);
+        Human eva = new Human("Eva", 42);
+        List<Human> collection = Arrays.asList(sara, eva, viktor);
         assertThat(Task.getOldestPerson(collection), is(eva));
     }
 
     @Test
     public void partitionAdultsShouldSeparateKidsFromAdults() {
-        Person sara = new Person("Sara", 4);
-        Person viktor = new Person("Viktor", 40);
-        Person eva = new Person("Eva", 42);
-        List<Person> collection = Arrays.asList(sara, eva, viktor);
-        Map<Boolean, List<Person>> result = Task.partitionAdults(collection);
+        Human sara = new Human("Sara", 4);
+        Human viktor = new Human("Viktor", 40);
+        Human eva = new Human("Eva", 42);
+        List<Human> collection = Arrays.asList(sara, eva, viktor);
+        Map<Boolean, List<Human>> result = Task.partitionAdults(collection);
         assertThat(result.get(true),is(Arrays.asList(eva, viktor)));
         assertThat(result.get(false),is(Arrays.asList(sara)));
     }
@@ -57,15 +57,15 @@ public class TaskTest {
 
     @Test
     public void mapNameToPerson() {
-        Person sara = new Person("Sara", 4);
-        Person viktor = new Person("Viktor", 40);
-        Person eva = new Person("Eva", 42);
-        Map<String,Person> map = new HashMap<>();
+        Human sara = new Human("Sara", 4);
+        Human viktor = new Human("Viktor", 40);
+        Human eva = new Human("Eva", 42);
+        Map<String, Human> map = new HashMap<>();
         map.put(sara.getName(),sara);
         map.put(viktor.getName(),viktor);
         map.put(eva.getName(),eva);
-        List<Person> collection = Arrays.asList(sara, eva, viktor);
-        Map<String, Person> result = Task.createMap(collection);
+        List<Human> collection = Arrays.asList(sara, eva, viktor);
+        Map<String, Human> result = Task.createMap(collection);
         assertThat(result,is(map));
     }
 

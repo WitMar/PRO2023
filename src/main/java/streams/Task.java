@@ -1,13 +1,10 @@
 package streams;
 
-import streams.model.Person;
+import streams.model.Human;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.partitioningBy;
-import static java.util.stream.Collectors.toList;
 
 // Code from https://github.com/vfarcic/java-8-exercises
 
@@ -49,31 +46,31 @@ public class Task {
      * MEDIUM
      */
 
-    public static Map<String,Person> createMapOldJava(List<Person> collection) {
-        Map<String,Person> people = new HashMap<>();
-        for (Person element : collection) {
+    public static Map<String, Human> createMapOldJava(List<Human> collection) {
+        Map<String, Human> people = new HashMap<>();
+        for (Human element : collection) {
             people.put(element.getName(), element);
         }
         return people;
     }
 
-    public static Map<String,Person> createMap(List<Person> collection) {
+    public static Map<String, Human> createMap(List<Human> collection) {
         // ToDo
         return null;
     }
 
 
-    public static Person getOldestPersonOldJava(List<Person> people) {
-        Person oldestPerson = new Person("", 0);
-        for (Person person : people) {
-            if (person.getAge() > oldestPerson.getAge()) {
-                oldestPerson = person;
+    public static Human getOldestPersonOldJava(List<Human> people) {
+        Human oldestHuman = new Human("", 0);
+        for (Human human : people) {
+            if (human.getAge() > oldestHuman.getAge()) {
+                oldestHuman = human;
             }
         }
-        return oldestPerson;
+        return oldestHuman;
     }
 
-    public static Person getOldestPerson(List<Person> people) {
+    public static Human getOldestPerson(List<Human> people) {
         // ToDo
         return null;
     }
@@ -83,18 +80,18 @@ public class Task {
      */
 
 
-    public static Map<Boolean, List<Person>> partitionAdultsOldJava(List<Person> people) {
-        Map<Boolean, List<Person>> map = new HashMap<>();
+    public static Map<Boolean, List<Human>> partitionAdultsOldJava(List<Human> people) {
+        Map<Boolean, List<Human>> map = new HashMap<>();
         map.put(true, new ArrayList<>());
         map.put(false, new ArrayList<>());
-        for (Person person : people) {
-            map.get(person.getAge() >= 18).add(person);
+        for (Human human : people) {
+            map.get(human.getAge() >= 18).add(human);
         }
         return map;
     }
 
     // use partitionBy
-    public static Map<Boolean, List<Person>> partitionAdults(List<Person> people) {
+    public static Map<Boolean, List<Human>> partitionAdults(List<Human> people) {
         // ToDo
         return null;
     }
