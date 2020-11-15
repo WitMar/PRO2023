@@ -57,6 +57,7 @@ public class ModelObjectsCreator {
         emp.setAddress(address);
         emp2.setAddress(address);
         emp.getSubworkers().add(emp2);
+
         //This will give us infinite recursion
         //emp2.getManagers().add(emp);
 

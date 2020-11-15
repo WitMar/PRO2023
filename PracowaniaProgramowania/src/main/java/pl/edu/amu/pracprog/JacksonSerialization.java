@@ -24,6 +24,7 @@ public class JacksonSerialization {
         //Serialize to file and string
         mapper.writeValue(new File("result." + fileSuffix), employee);
         String jsonString = mapper.writeValueAsString(employee);
+
         logger.info("Printing serialized original object " + fileSuffix);
         System.out.println(jsonString);
 
@@ -39,10 +40,6 @@ public class JacksonSerialization {
         String modifiedJsonString = mapper.writeValueAsString(deserializedEmployee);
         logger.info("Printing serialized modified object " + fileSuffix);
         System.out.println(modifiedJsonString);
-    }
-
-    public static void serializeListDemo(ObjectMapper mapper, String fileSuffix) throws IOException {
-
     }
 
     public static void deserializeDemo(ObjectMapper mapper, String fileSuffix) throws IOException {

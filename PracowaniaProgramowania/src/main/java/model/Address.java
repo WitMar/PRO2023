@@ -10,7 +10,7 @@ public class Address {
 
     String nr;
 
-    String housenr;
+    String houseNr;
 
     String postcode;
 
@@ -46,12 +46,12 @@ public class Address {
         this.nr = nr;
     }
 
-    public String getHousenr() {
-        return housenr;
+    public String getHouseNr() {
+        return houseNr;
     }
 
-    public void setHousenr(String housenr) {
-        this.housenr = housenr;
+    public void setHouseNr(String houseNr) {
+        this.houseNr = houseNr;
     }
 
     public String getPostcode() {
