@@ -2,6 +2,7 @@ package hibernate;
 
 import hibernate.model.Employee;
 import hibernate.queries.Queries;
+import org.hibernate.Session;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,8 +25,10 @@ class Manager {
             entityManagerFactory = Persistence.createEntityManagerFactory("hibernate-dynamic");
 
             entityManager = entityManagerFactory.createEntityManager();
+            Session session = entityManager.unwrap(Session.class);
 
-            entityManager.getTransaction().begin();
+            //New transaction
+            session.beginTransaction();
 
             Employee emp = new Employee();
             emp.setFirstName("Jan");
@@ -33,9 +36,10 @@ class Manager {
             emp.setSalary(100);
             emp.setPesel(new Random().nextInt());
 
-            entityManager.persist(emp);
+            // Save in First order Cache (not database yet)
+            session.save(emp);
 
-            Employee employee = entityManager.find(Employee.class, emp.getId());
+            Employee employee = session.get(Employee.class, emp.getId());
             if (employee == null) {
                 System.out.println(emp.getId() + " not found! ");
             } else {
@@ -44,13 +48,14 @@ class Manager {
 
             System.out.println("Employee " + employee.getId() + " " + employee.getFirstName() + employee.getLastName());
 
-            changeFirstGuyToNowak(entityManager);
+            changeFirstGuyToNowak(session);
 
-            entityManager.getTransaction().commit();
+            //Commit transaction to database
+            session.getTransaction().commit();
 
             System.out.println("Done");
 
-            entityManager.close();
+            session.close();
 
         } catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed
@@ -61,9 +66,9 @@ class Manager {
 
     }
 
-    static void changeFirstGuyToNowak(EntityManager entityManager) {
+    static void changeFirstGuyToNowak(Session session) {
 
-        List<Employee> employees = new Queries(entityManager).getEmployeeByName("Polak");
+        List<Employee> employees = new Queries(session).getEmployeeByName("Polak");
 
         employees.get(0).setLastName("NowakPRE" + new Random().nextInt());
 
