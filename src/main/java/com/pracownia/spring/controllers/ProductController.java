@@ -28,7 +28,7 @@ public class ProductController {
      * List all products.
      *
      */
-    @RequestMapping(value = "/products", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Product> list(Model model) {
         return productService.listAllProducts();
     }
@@ -45,7 +45,7 @@ public class ProductController {
      *
      * @return
      */
-    @RequestMapping(value = "/product/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/product/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Optional<Product> getByPublicId(@PathVariable("id") Integer publicId) {
         return productService.getProductById(publicId);
     }
@@ -55,7 +55,7 @@ public class ProductController {
      *
      * @return
      */
-    @RequestMapping(value = "/product", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/product", produces = MediaType.APPLICATION_JSON_VALUE)
     public Optional<Product> getByParamPublicId(@RequestParam("id") Integer publicId) {
         return productService.getProductById(publicId);
     }
@@ -64,7 +64,7 @@ public class ProductController {
      * Save product to database.
      *
      */
-    @RequestMapping(value = "/product", method = RequestMethod.POST)
+    @PostMapping(value = "/product")
     public ResponseEntity<Product> create(@RequestBody Product product) {
         product.setProductId(UUID.randomUUID().toString());
         productService.saveProduct(product);
@@ -76,7 +76,7 @@ public class ProductController {
      * Edit product in database.
      *
      */
-    @RequestMapping(value = "/product", method = RequestMethod.PUT)
+    @PutMapping(value = "/product")
     public ResponseEntity<Void> edit(@RequestBody Product product) {
         if(!productService.checkIfExist(product.getId()))
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -90,7 +90,7 @@ public class ProductController {
      * Delete product by its id.
      *
      */
-    @RequestMapping(value = "/product/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/product/{id}")
     public RedirectView delete(@PathVariable Integer id) {
         productService.deleteProduct(id);
         return new RedirectView("/api/products", true);
