@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import springfox.documentation.annotations.ApiIgnore;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -67,7 +65,7 @@ public class ProductController {
      *
      */
     @RequestMapping(value = "/product", method = RequestMethod.POST)
-    public ResponseEntity<Product> create(@RequestBody @Valid @NotNull Product product) {
+    public ResponseEntity<Product> create(@RequestBody Product product) {
         product.setProductId(UUID.randomUUID().toString());
         productService.saveProduct(product);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -79,7 +77,7 @@ public class ProductController {
      *
      */
     @RequestMapping(value = "/product", method = RequestMethod.PUT)
-    public ResponseEntity<Void> edit(@RequestBody @Valid @NotNull Product product) {
+    public ResponseEntity<Void> edit(@RequestBody Product product) {
         if(!productService.checkIfExist(product.getId()))
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         else {

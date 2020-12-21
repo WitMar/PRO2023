@@ -15,18 +15,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication
-@EnableJpaRepositories("com.pracownia.spring.repositories")
-@EnableSwagger2
-public class SpringBootWebApplication extends SpringBootServletInitializer {
+class SpringBootWebApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(SpringBootWebApplication.class);
+        return application.sources(SpringApp.class);
     }
-
-    public static void main(String[] args) {
-        SpringApplication.run(SpringBootWebApplication.class, args);
-    }
-
 }
