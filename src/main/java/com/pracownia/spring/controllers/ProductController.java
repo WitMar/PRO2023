@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import springfox.documentation.annotations.ApiIgnore;
@@ -65,7 +67,8 @@ public class ProductController {
      *
      */
     @PostMapping(value = "/product")
-    public ResponseEntity<Product> create(@RequestBody Product product) {
+    public ResponseEntity<Product> create(@RequestBody @NonNull @Validated(Product.class)
+                                                      Product product) {
         product.setProductId(UUID.randomUUID().toString());
         productService.saveProduct(product);
         return new ResponseEntity<>(HttpStatus.CREATED);
