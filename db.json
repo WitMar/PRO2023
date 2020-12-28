@@ -1,8 +1,18 @@
 {
   "todos": [
     {
-      "id": 763,
-      "value": "test todo",
+      "id": 0,
+      "value": "Learn React",
+      "done": true
+    },
+    {
+      "id": 1,
+      "value": "Pass Programming Laboratory",
+      "done": false
+    },
+    {
+      "id": 3,
+      "value": "Have a nice holiday",
       "done": false
     }
   ]
