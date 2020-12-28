@@ -1,0 +1,23 @@
+{
+  "name": "todoapp",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "json-server": "^0.12.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "0.9.5",
+    "styled-components": "^5.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "description": "This project was bootstrapped with [Create React TodoApp](https://github.com/facebookincubator/create-react-app).",
+  "main": "index.js",
+  "author": "Marcin Witkowski",
+  "license": "ISC"
+}
