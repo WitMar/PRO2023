@@ -1,4 +1,4 @@
-package com.example.springsocial.security.oauth2;
+package com.example.springsocial.repository;
 
 import com.example.springsocial.util.CookieUtils;
 import com.nimbusds.oauth2.sdk.util.StringUtils;
@@ -9,6 +9,11 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+/**
+ * Used for communication with authorization service
+ * @see https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-2/#1-httpcookieoauth2authorizationrequestrepository
+ */
 @Component
 public class HttpCookieOAuth2AuthorizationRequestRepository implements AuthorizationRequestRepository<OAuth2AuthorizationRequest> {
     public static final String OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME = "oauth2_auth_request";

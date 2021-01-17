@@ -1,6 +1,7 @@
 package com.example.springsocial.security;
 
 import com.example.springsocial.config.AppProperties;
+import com.example.springsocial.model.UserPrincipal;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

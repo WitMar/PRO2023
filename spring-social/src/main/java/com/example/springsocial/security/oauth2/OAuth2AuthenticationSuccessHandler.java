@@ -2,6 +2,7 @@ package com.example.springsocial.security.oauth2;
 
 import com.example.springsocial.config.AppProperties;
 import com.example.springsocial.exception.BadRequestException;
+import com.example.springsocial.repository.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.example.springsocial.security.TokenProvider;
 import com.example.springsocial.util.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Optional;
 
-import static com.example.springsocial.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
+import static com.example.springsocial.repository.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 
 @Component
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {

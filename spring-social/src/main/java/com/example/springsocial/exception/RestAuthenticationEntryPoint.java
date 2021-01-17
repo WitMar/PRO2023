@@ -1,4 +1,4 @@
-package com.example.springsocial.security;
+package com.example.springsocial.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
