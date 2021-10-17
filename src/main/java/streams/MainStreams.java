@@ -1,3 +1,5 @@
+package streams;
+
 import streams.LocalVariables;
 import streams.model.Student;
 
