@@ -30,11 +30,12 @@ public class MainLazy {
                         }
                     }
                     return a;
-                }).limit(5)
+                }).sorted() // Sorted stop
+                .limit(5)
                 .forEach(a -> System.out.println(a));
 
         Stream.of("Sun", "Set", "Run", "Stream").filter(word -> {
-            System.out.println(word);
+            System.out.println("1: " + word);
             return word.startsWith("S");
         }).limit(2).sorted().forEach(System.out::println);
 

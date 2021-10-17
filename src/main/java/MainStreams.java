@@ -4,6 +4,7 @@ import streams.model.Student;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,9 +16,9 @@ public class MainStreams {
 
         //Old Java
         List<Student> students = new ArrayList<>();
-        students.add(new Student("Arnold"));
-        students.add(new Student("John"));
-        students.add(new Student("Barrack"));
+        students.add(new Student("Arnold", 1L, 2L));
+        students.add(new Student("John", 1L, 3L));
+        students.add(new Student("Barrack", 2L ,1L));
         List<String> names = new ArrayList<>();
         for (Student student: students) {
             if (student.getName ().startsWith("A")) {
@@ -32,12 +33,28 @@ public class MainStreams {
                 .collect (Collectors.toList());
 
 
-        //stream
+        //Stream
         Stream.of("This", "is", "Java8", "Stream").forEach(System.out::println);
 
         String[] stringArray = new String[]{"Streams", "can", "be", "created", "from", "arrays"};
 
         Arrays.stream(stringArray).forEach(System.out::println);
+
+        Stream<Student> whatIsIt = students.stream().filter(s -> s.getName().length() > 2);
+
+        Long whatIsIt_2 = students.stream().filter(s -> s.getName().length() > 2).collect(Collectors.counting());
+
+        List<String> whatIsIt_3 = students.stream()
+                .filter(s -> s.getName().length() > 2)
+                .map(Student::getName)
+                .collect(Collectors.toList());
+
+        Map<Long, List<Student>> studentsByYear = students.stream()
+                .collect(Collectors.groupingBy(Student::getYear));
+
+        Map<Boolean, List<Student>> groups =
+                students.stream().collect(Collectors.partitioningBy(s -> s.getName().startsWith("A")));
+
     }
 
 }
