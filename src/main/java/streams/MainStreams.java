@@ -1,3 +1,5 @@
+package streams;
+
 import streams.LocalVariables;
 import streams.model.Student;
 
@@ -15,9 +17,9 @@ public class MainStreams {
 
         //Old Java
         List<Student> students = new ArrayList<>();
-        students.add(new Student("Arnold"));
-        students.add(new Student("John"));
-        students.add(new Student("Barrack"));
+        students.add(new Student("Arnold", 1L, 2L));
+        students.add(new Student("John", 1L, 3L));
+        students.add(new Student("Barrack", 2L, 1L));
         List<String> names = new ArrayList<>();
         for (Student student: students) {
             if (student.getName ().startsWith("A")) {
