@@ -1,7 +1,6 @@
-package fluentAPI;
+package fluentAPI.model;
 
 import fluentAPI.interfaces.IPerson;
-import fluentAPI.interfaces.Title;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +13,9 @@ public class Person implements IPerson {
     String name;
     Enum title;
 
-    Person(String name, fluentAPI.interfaces.Title title) {
+    protected Person(String name, fluentAPI.interfaces.Title title) {
         this.name = name;
         this.title = title;
-    }
-
-    public IPerson getMe(Person someone) {
-        return someone;
     }
 
     @Override

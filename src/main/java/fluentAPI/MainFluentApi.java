@@ -1,7 +1,7 @@
 package fluentAPI;
 
-import fluentAPI.Person;
-import fluentAPI.PersonBuilder;
+import fluentAPI.model.Person;
+import fluentAPI.model.PersonBuilder;
 import fluentAPI.interfaces.Title;
 
 import java.util.List;

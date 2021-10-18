@@ -1,9 +1,7 @@
-package fluentAPI;
+package fluentAPI.model;
 
 import fluentAPI.interfaces.IPersonBuilder;
 import fluentAPI.interfaces.Title;
-
-import java.util.stream.IntStream;
 
 public class PersonBuilder implements IPersonBuilder {
 

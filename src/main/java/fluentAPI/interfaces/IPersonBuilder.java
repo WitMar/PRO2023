@@ -1,6 +1,6 @@
 package fluentAPI.interfaces;
 
-import fluentAPI.Person;
+import fluentAPI.model.Person;
 
 public interface IPersonBuilder {
 
