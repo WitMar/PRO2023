@@ -17,10 +17,6 @@ public class Person implements IPerson {
         this.title = title;
     }
 
-    public IPerson getMe(Person someone) {
-        return someone;
-    }
-
     @Override
     public IPerson addFriend(Person friend) {
         this.friends.add(friend);
