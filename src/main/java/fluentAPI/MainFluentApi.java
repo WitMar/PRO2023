@@ -1,18 +1,14 @@
 package fluentAPI;
 
-import fluentAPI.Person;
-import fluentAPI.PersonBuilder;
 import fluentAPI.interfaces.Title;
-
-import java.util.List;
-import java.util.function.Function;
+import fluentAPI.model.Person;
 
 public class MainFluentApi {
 
     public static void main(String[] args) {
 
         //Package-private constructor is not accessible here, we must use the builder:
-        //Person p = new Person("a",Title.PROF);
+        //Person p = new Person("a", Title.PROF);
 
         // Todo
     }
