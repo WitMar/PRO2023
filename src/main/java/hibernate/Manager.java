@@ -45,8 +45,8 @@ class Manager {
 
             System.out.println("Employee " + employee.getId() + " " + employee.getFirstName() + employee.getLastName());
 
-            employee.setLastName("NowakPRE" + new Random().nextInt()); // No SQL needed
             //changeFirstGuyToNowak(session);
+            employee.setLastName("NowakPRE" + new Random().nextInt()); // No SQL needed
 
             //Commit transaction to database
             session.getTransaction().commit();
@@ -59,7 +59,7 @@ class Manager {
             // Make sure you log the exception, as it might be swallowed
             System.err.println("Initial SessionFactory creation failed." + ex);
         } finally {
-            entityManagerFactory.close();
+
         }
 
     }
