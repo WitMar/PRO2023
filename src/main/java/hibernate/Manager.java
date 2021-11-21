@@ -30,11 +30,8 @@ class Manager {
             //New transaction
             session.beginTransaction();
 
-            Employee emp = new Employee();
-            emp.setFirstName("Jan");
-            emp.setLastName("Polak" + new Random().nextInt());
-            emp.setSalary(100);
-            emp.setPesel(new Random().nextInt());
+            // Create Employee
+            Employee emp = createEmployee();
 
             // Save in First order Cache (not database yet)
             session.save(emp);
@@ -64,6 +61,15 @@ class Manager {
             entityManagerFactory.close();
         }
 
+    }
+
+    private static Employee createEmployee() {
+        Employee emp = new Employee();
+        emp.setFirstName("Jan");
+        emp.setLastName("Polak" + new Random().nextInt());
+        emp.setSalary(100);
+        emp.setPesel(new Random().nextInt());
+        return emp;
     }
 
     static void changeFirstGuyToNowak(Session session) {
