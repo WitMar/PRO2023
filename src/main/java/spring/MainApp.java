@@ -1,15 +1,25 @@
 package spring;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
+@SpringBootApplication
 public class MainApp {
     public static void main(String[] args) {
-        ApplicationContext ctx =
-                new AnnotationConfigApplicationContext(HelloWorldConfig.class);
+        SpringApplication bootApp = new SpringApplication(HelloWorldConfig.class);
+        ConfigurableApplicationContext context = bootApp.run(args);
 
-        HelloWorld helloWorld = ctx.getBean(HelloWorld.class);
+        HelloWorld helloWorld = context.getBean(HelloWorld.class);
         helloWorld.setMessage("Hello World!");
         helloWorld.getMessage();
+
+        YAMLConfig config = context.getBean(YAMLConfig.class);
+        System.out.println(config.getName());
+        System.out.println(config.getVariable());
+        System.out.println(config.isEnabled());
+        System.out.println(config.getEnvironment());
+        System.out.println(config.getServers().length);
+
     }
 }

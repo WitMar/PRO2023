@@ -36,7 +36,7 @@ public class HttpRequest {
 
     private static void sendGet() throws Exception {
 
-        HttpGet request = new HttpGet("http://localhost:8080/spring-1.0-SNAPSHOT/api/products/");
+        HttpGet request = new HttpGet("http://localhost:8080/api/products/");
 
         // add request headers
         request.addHeader("custom-key", "programming");
@@ -62,7 +62,7 @@ public class HttpRequest {
 
     private static void sendPost() throws Exception {
 
-        HttpPost post = new HttpPost("http://localhost:8080/spring-1.0-SNAPSHOT/api/product/");
+        HttpPost post = new HttpPost("http://localhost:8080/api/product/");
 
         String json = "{\"name\": \"Kaszanka\",\n" +
                 "        \"price\": 12.5,\n" +

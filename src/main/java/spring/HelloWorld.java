@@ -1,5 +1,7 @@
 package spring;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class HelloWorld {
     private String message;
 
@@ -9,4 +11,5 @@ public class HelloWorld {
     public void getMessage(){
         System.out.println("Your Message : " + message);
     }
+
 }

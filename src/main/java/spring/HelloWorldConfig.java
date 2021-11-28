@@ -1,11 +1,19 @@
 package spring;
 
-import org.springframework.context.annotation.*;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.context.annotation.Bean;
 
-@Configuration
+@SpringBootConfiguration
 public class HelloWorldConfig {
+
     @Bean
-    public HelloWorld helloWorld(){
+    public HelloWorld helloWorld() {
         return new HelloWorld();
     }
+
+    @Bean
+    public YAMLConfig config() {
+        return new YAMLConfig();
+    }
+
 }
