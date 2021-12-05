@@ -48,8 +48,8 @@ public class ProductController {
      * @return
      */
     @GetMapping(value = "/product/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Optional<Product> getByPublicId(@PathVariable("id") Integer publicId) {
-        return productService.getProductById(publicId);
+    public Product getByPublicId(@PathVariable("id") Integer publicId) {
+        return productService.getProductById(publicId).orElseGet(null);
     }
 
     /**
@@ -58,8 +58,8 @@ public class ProductController {
      * @return
      */
     @GetMapping(value = "/product", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Optional<Product> getByParamPublicId(@RequestParam("id") Integer publicId) {
-        return productService.getProductById(publicId);
+    public Product getByParamPublicId(@RequestParam("id") Integer publicId) {
+        return productService.getProductById(publicId).orElseGet(null);
     }
 
     /**
@@ -98,5 +98,11 @@ public class ProductController {
         productService.deleteProduct(id);
         return new RedirectView("/api/products", true);
     }
+
+    @DeleteMapping(value = "/products/{id}")
+    public ResponseEntity deleteBadRequest(@PathVariable Integer id) {
+        return new ResponseEntity(HttpStatus.FORBIDDEN);
+    }
+
 
 }
