@@ -1,0 +1,15 @@
+## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.HSQLDialect
+        ddl-auto: update
+    show-sql: true
+  database:
+    driverClassName: org.hsqldb.jdbcDriver
+  datasource:
+    url: jdbc:hsqldb:mem:spring
+    username: sa
+    password:
+
