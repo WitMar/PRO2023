@@ -1,14 +1,10 @@
 package com.pracownia.spring.entities;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -39,7 +35,7 @@ public class Product {
     private Set<Seller> sellers = new HashSet<>();
 
     //required by Hibernate
-    public Product(){
+    public Product() {
 
     }
 
