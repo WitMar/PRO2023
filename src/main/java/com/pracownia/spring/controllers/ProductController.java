@@ -35,13 +35,6 @@ public class ProductController {
         return productService.listAllProducts();
     }
 
-    // Only for redirect!
-    @ApiIgnore
-    @RequestMapping(value = "/products", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Iterable<Product> redirect(Model model) {
-        return productService.listAllProducts();
-    }
-
     /**
      * View a specific product by its id.
      *
@@ -67,8 +60,7 @@ public class ProductController {
      *
      */
     @PostMapping(value = "/product")
-    public ResponseEntity<Product> create(@RequestBody @NonNull @Validated(Product.class)
-                                                      Product product) {
+    public ResponseEntity<Product> create(@RequestBody Product product) {
         product.setProductId(UUID.randomUUID().toString());
         productService.saveProduct(product);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -96,7 +88,7 @@ public class ProductController {
     @DeleteMapping(value = "/product/{id}")
     public RedirectView delete(@PathVariable Integer id) {
         productService.deleteProduct(id);
-        return new RedirectView("/api/products", true);
+        return new RedirectView("/products", true);
     }
 
     @DeleteMapping(value = "/products/{id}")
