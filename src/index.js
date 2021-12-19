@@ -2,8 +2,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import TodoList from "./TodoList/TodoList";
 import React from "react";
+import List from "./List/List";
 
 ReactDOM.render(
-  <TodoList/>,
+  <List/>,
   document.getElementById('root')
 );
