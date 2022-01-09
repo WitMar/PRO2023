@@ -3,10 +3,11 @@ package com.example.springsocial.controller;
 import com.example.springsocial.exception.ResourceNotFoundException;
 import com.example.springsocial.model.User;
 import com.example.springsocial.repository.UserRepository;
-import com.example.springsocial.model.CurrentUser;
 import com.example.springsocial.model.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,14 +19,15 @@ public class UserController {
 
     @GetMapping("/user/me")
     @PreAuthorize("hasRole('USER')")
-    public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
-        return userRepository.findById(userPrincipal.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
+    public User getCurrentUser(Authentication authentication) {
+        UserPrincipal userDetails = (UserPrincipal) authentication.getPrincipal();
+        return userRepository.findById(userDetails.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userDetails.getId()));
     }
 
     @GetMapping(value = "/data", produces = "application/json")
     @PreAuthorize("hasRole('USER')")
-    public String getUserSecretData(@CurrentUser UserPrincipal userPrincipal) {
+    public String getUserSecretData(Authentication authentication) {
         return "Now server can reveal user's secret data";
     }
 }
