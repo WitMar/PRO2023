@@ -10,14 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Show an error with the request in case authorization fails.
+ */
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     private static final Logger logger = LoggerFactory.getLogger(RestAuthenticationEntryPoint.class);
 
     @Override
     public void commence(HttpServletRequest httpServletRequest,
-                         HttpServletResponse httpServletResponse,
-                         AuthenticationException e) throws IOException, ServletException {
+            HttpServletResponse httpServletResponse,
+            AuthenticationException e) throws IOException, ServletException {
         logger.error("Responding with unauthorized error. Message - {}", e.getMessage());
         httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED,
                 e.getLocalizedMessage());

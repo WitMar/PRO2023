@@ -20,6 +20,7 @@ spring:
             google:
               clientId: 95005436432-obbb36j1rfeiu5ar548ol8pjggreq520.apps.googleusercontent.com
               clientSecret: exKT8hxHWlceIJpdHI3VJX4e
+              # Necessary for google to redirect call
               redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
               scope:
                 - email
