@@ -10,8 +10,8 @@ public class ProcessQuery {
         this.queryClass = queryClass;
     }
 
-    public String process() {
-        return queryClass.query().toUpperCase();
+    public String process(String param) {
+        return queryClass.query(param).toUpperCase();
     }
 
 }

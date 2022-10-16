@@ -1,13 +1,11 @@
 package second.junit;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
 
 public class MockTest {
 
@@ -21,11 +19,11 @@ public class MockTest {
 
     @Test
     public void mockTestExample() {
-        Mockito.when(httpQueryClass.query()).thenReturn("test");
+        Mockito.when(httpQueryClass.query(any())).thenReturn("test");
 
         ProcessQuery processQuery = new ProcessQuery(httpQueryClass);
 
-        String result = processQuery.process();
+        String result = processQuery.process("test param");
         assertThat(result).isEqualTo("TEST");
     }
 
