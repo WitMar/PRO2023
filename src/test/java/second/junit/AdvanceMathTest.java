@@ -1,4 +1,3 @@
-
 package second.junit;
 
 import org.junit.Assert;
@@ -20,7 +19,7 @@ public class AdvanceMathTest {
     @Test
     public void additionTest() {
         Integer a = math.addition(1, 4);
-        assertTrue(a == 5);
+        Assert.assertTrue(a == 5);
     }
 
     @Test
