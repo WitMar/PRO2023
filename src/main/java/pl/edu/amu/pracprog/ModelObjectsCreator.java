@@ -2,6 +2,7 @@ package pl.edu.amu.pracprog;
 
 import model.Address;
 import model.Employee;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +41,14 @@ public class ModelObjectsCreator {
         emp.setLastName("Polak" + new Random().nextInt());
         emp.setSalary(100);
         emp.setPesel(Math.abs(new Random().nextInt()));
+        emp.setBirthDate(new DateTime());
 
         emp2 = new Employee();
         emp2.setFirstName("Roman");
         emp2.setLastName("Polak" + new Random().nextInt());
         emp2.setSalary(100);
         emp2.setPesel(Math.abs(new Random().nextInt()));
+        emp2.setBirthDate(new DateTime().plusDays(10));
 
         //add address
         Address address = new Address();
@@ -59,7 +62,7 @@ public class ModelObjectsCreator {
         emp.getSubworkers().add(emp2);
 
         //This will give us infinite recursion
-        //emp2.getManagers().add(emp);
+        emp2.getManagers().add(emp);
 
         employees = new ArrayList<Employee>();
         employees.add(emp);
