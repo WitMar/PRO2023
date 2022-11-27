@@ -86,6 +86,16 @@ class Manager {
 
             session.getTransaction().commit();
 
+            getAllEmployeeByPage(2, session).stream().forEach(em -> System.out.println(em.getFirstName()));
+
+            session.getTransaction().begin();
+            //session.delete(emp); //ERROR remove detached instance
+            emp = createEmployee();
+            emp.setId(1);
+
+            // Save in First order Cache (not database yet)
+            session.save(emp);
+
             session.close();
 
         } catch (Throwable ex) {
@@ -117,6 +127,26 @@ class Manager {
 
         employees.get(0).setLastName("NowakPRE" + new Random().nextInt());
 
+    }
+
+    public static List<Employee> getAllEmployeeByPage(int pagenr, Session session) {
+        //calculate total number
+        Query queryTotal = session.createQuery
+                ("Select count(e) from Employee e");
+        long countResult = (long)queryTotal.getSingleResult();
+
+        //create query
+        Query query = session.createQuery("Select e FROM Employee e");
+        //set pageSize
+        int pageSize = 4;
+        //calculate number of pages
+        int pageNumber = (int) ((countResult / pageSize) + 1);
+
+        if (pagenr > pageNumber) pagenr = pageNumber;
+        query.setFirstResult((pagenr-1) * pageSize);
+        query.setMaxResults(pageSize);
+
+        return query.getResultList();
     }
 
 }

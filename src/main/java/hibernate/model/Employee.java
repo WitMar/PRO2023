@@ -30,7 +30,7 @@ public class Employee {
     @ElementCollection
     private List<String> phones = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.DETACH,CascadeType.MERGE})
     @JoinColumn(name="address_id")
     Address address;
 
