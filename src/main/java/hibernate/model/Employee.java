@@ -30,6 +30,10 @@ public class Employee {
     @ElementCollection
     private List<String> phones = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="address_id")
+    Address address;
+
     public Employee() {}
 
     public int getId() {
@@ -72,11 +76,19 @@ public class Employee {
         this.pesel = pesel;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     public static Employee copyEmployee(Employee emp) {
         Employee person = new Employee();
-        //person.setAddress(emp.getAddress());
+        person.setAddress(emp.getAddress());
         person.setLastName(emp.getLastName());
-        person.setFirstName(emp.getFirstName());
+        person.setFirstName(emp.getFirstName() + new Random().nextInt());
         person.setPesel(new Random().nextInt());
         person.setSalary(emp.getSalary());
         return person;
