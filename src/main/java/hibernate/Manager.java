@@ -56,6 +56,8 @@ class Manager {
 
             session.refresh(employee);
 
+            getThemAll(session).stream().forEach(em -> System.out.println(em.getFirstName() + " " +em.getLastName()));
+
             System.out.println("Done");
 
             session.close();
@@ -76,6 +78,10 @@ class Manager {
         emp.setSalary(100);
         emp.setPesel(new Random().nextInt());
         return emp;
+    }
+
+    static List<Employee> getThemAll(Session session) {
+        return session.createQuery("from Employee").getResultList();
     }
 
     static void changeFirstGuyToNowak(Session session) {
