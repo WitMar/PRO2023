@@ -45,11 +45,16 @@ class Manager {
 
             System.out.println("Employee " + employee.getId() + " " + employee.getFirstName() + employee.getLastName());
 
-            //changeFirstGuyToNowak(session);
+            session.flush();
+            session.refresh(employee);
+            //
+            changeFirstGuyToNowak(session);
             employee.setLastName("NowakPRE" + new Random().nextInt()); // No SQL needed
 
             //Commit transaction to database
             session.getTransaction().commit();
+
+            session.refresh(employee);
 
             System.out.println("Done");
 
