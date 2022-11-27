@@ -71,7 +71,7 @@ public class Employee {
         Employee person = new Employee();
         //person.setAddress(emp.getAddress());
         person.setLastName(emp.getLastName());
-        person.setFirstName(emp.getFirstName());
+        person.setFirstName(emp.getFirstName() + new Random().nextInt());
         person.setPesel(new Random().nextInt());
         person.setSalary(emp.getSalary());
         return person;
