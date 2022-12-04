@@ -25,7 +25,7 @@ public class CreateModel {
             Session session = entityManager.unwrap(Session.class);
 
         } catch (Exception e) {
-
+            System.out.println(e);
         }
     }
 }
