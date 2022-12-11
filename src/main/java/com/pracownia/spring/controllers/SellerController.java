@@ -30,13 +30,6 @@ public class SellerController {
         return sellerService.listAllSellers();
     }
 
-    // Only for redirect!
-    @ApiIgnore
-    @DeleteMapping(value = "/sellers", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Iterable<Seller> redirect(Model model) {
-        return sellerService.listAllSellers();
-    }
-
     @PostMapping(value = "/seller")
     public ResponseEntity<Seller> create(@RequestBody @Validated(Seller.class) @NonNull Seller seller) {
         sellerService.saveSeller(seller);
@@ -53,23 +46,23 @@ public class SellerController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value = "/seller/{id}", method = RequestMethod.DELETE)
-    public RedirectView delete(HttpServletResponse response, @PathVariable Integer id) {
+    @DeleteMapping(value = "/seller/{id}")
+    public ResponseEntity<Void> delete(HttpServletResponse response, @PathVariable Integer id) {
         sellerService.deleteSeller(id);
-        return new RedirectView("/api/sellers", true);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/seller/{name}", method = RequestMethod.GET)
+    @GetMapping(value = "/seller/{name}")
     public List<Seller> getByName(@PathVariable String name) {
         return sellerService.getByName(name);
     }
 
-    @RequestMapping(value = "/seller/products/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/seller/products/{id}")
     public Integer getProductsSize(@PathVariable Integer id) {
         return sellerService.getNumberOfProducts(id);
     }
 
-    @RequestMapping(value = "/seller/best", method = RequestMethod.GET)
+    @GetMapping(value = "/seller/best")
     public Seller getBestSeller() {
         return sellerService.getBestSeller().get();
     }
@@ -78,5 +71,10 @@ public class SellerController {
     @ResponseBody
     public Seller getByPublicId(@PathVariable("id") Integer publicId) {
         return sellerService.getSellerById(publicId).get();
+    }
+
+    @GetMapping(value = "/sellerProductsCost/{id}")
+    public Long getProductCosts(@PathVariable("id") Integer id) {
+        return sellerService.getProductCosts(id);
     }
 }

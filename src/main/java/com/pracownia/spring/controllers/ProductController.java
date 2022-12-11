@@ -102,6 +102,7 @@ public class ProductController {
      * Redirect endpoint
      * @return
      */
+    @ApiIgnore
     @RequestMapping(value = "/productsList")
     public Iterable<Product> redirect() {
         return productService.listAllProducts();

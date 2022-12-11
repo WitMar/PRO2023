@@ -68,4 +68,9 @@ public class SellerServiceImpl implements SellerService {
         return sellerRepository.findById(maxId);
     }
 
+    @Override
+    public Long getProductCosts(Integer id) {
+        return sellerRepository.countSumOfProductCosts(id);
+    }
+
 }

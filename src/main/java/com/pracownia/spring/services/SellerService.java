@@ -20,4 +20,6 @@ public interface SellerService {
     Integer getNumberOfProducts(Integer id);
 
     Optional<Seller> getBestSeller();
+
+    Long getProductCosts(Integer id);
 }
