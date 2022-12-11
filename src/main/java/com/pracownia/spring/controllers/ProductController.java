@@ -10,11 +10,17 @@ import org.springframework.lang.NonNull;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 /**
  * Product controller.
@@ -25,6 +31,7 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    private Logger logger = Logger.getLogger("Controller");
 
     /**
      * List all products.
@@ -63,7 +70,7 @@ public class ProductController {
     public ResponseEntity<Product> create(@RequestBody Product product) {
         product.setProductId(UUID.randomUUID().toString());
         productService.saveProduct(product);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity.ok().body(product);
     }
 
 
@@ -82,13 +89,22 @@ public class ProductController {
     }
 
     /**
-     * Delete product by its id.
+     * Delete product by its id and redirect
      *
      */
     @DeleteMapping(value = "/product/{id}")
     public RedirectView delete(@PathVariable Integer id) {
         productService.deleteProduct(id);
-        return new RedirectView("/products", true);
+        return new RedirectView("/api/productsList", true);
+    }
+
+    /**
+     * Redirect endpoint
+     * @return
+     */
+    @RequestMapping(value = "/productsList")
+    public Iterable<Product> redirect() {
+        return productService.listAllProducts();
     }
 
     @DeleteMapping(value = "/products/{id}")
