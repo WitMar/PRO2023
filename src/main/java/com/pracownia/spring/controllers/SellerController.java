@@ -31,7 +31,7 @@ public class SellerController {
     }
 
     @PostMapping(value = "/seller")
-    public ResponseEntity<Seller> create(@RequestBody @Validated(Seller.class) @NonNull Seller seller) {
+    public ResponseEntity<Seller> create(@RequestBody Seller seller) {
         sellerService.saveSeller(seller);
         return ResponseEntity.ok().body(seller);
     }

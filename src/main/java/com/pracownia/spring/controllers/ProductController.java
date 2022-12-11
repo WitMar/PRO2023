@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -67,12 +69,17 @@ public class ProductController {
      *
      */
     @PostMapping(value = "/product")
-    public ResponseEntity<Product> create(@RequestBody Product product) {
+    public ResponseEntity<Product> create(@RequestBody @Valid Product product) {
         product.setProductId(UUID.randomUUID().toString());
         productService.saveProduct(product);
         return ResponseEntity.ok().body(product);
     }
 
+    @ExceptionHandler
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public String handleException(MethodArgumentNotValidException exception) {
+        return exception.getFieldError().toString();
+    }
 
     /**
      * Edit product in database.
@@ -113,5 +120,10 @@ public class ProductController {
         return new ResponseEntity(HttpStatus.FORBIDDEN);
     }
 
+
+    @GetMapping(value = "/products/{page}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<Product> list(@PathVariable("page") Integer pageNr,@RequestParam(value = "size",required = false) Optional<Integer> howManyOnPage) {
+        return productService.listAllProductsPaging(pageNr, howManyOnPage.orElse(2));
+    }
 
 }

@@ -3,6 +3,7 @@ package com.pracownia.spring.services;
 import com.pracownia.spring.entities.Product;
 import com.pracownia.spring.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -42,6 +43,11 @@ public class ProductServiceImpl implements ProductService {
             return true;
         else
             return false;
+    }
+
+    @Override
+    public Iterable<Product> listAllProductsPaging(Integer pageNr, Integer howManyOnPage) {
+        return productRepository.findAll(PageRequest.of(pageNr,howManyOnPage));
     }
 
 

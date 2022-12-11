@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,6 +30,7 @@ public class Product {
     private String name;
 
     @Column
+    @Max(value = 100)
     private BigDecimal price;
 
     @Column(length = 1000)
