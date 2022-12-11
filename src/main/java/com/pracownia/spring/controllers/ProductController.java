@@ -6,15 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.NonNull;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.util.Optional;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 /**
  * Product controller.
@@ -25,10 +24,10 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    private Logger logger = Logger.getLogger("Controller");
 
     /**
      * List all products.
-     *
      */
     @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Product> list(Model model) {
@@ -57,23 +56,26 @@ public class ProductController {
 
     /**
      * Save product to database.
-     *
      */
     @PostMapping(value = "/product")
     public ResponseEntity<Product> create(@RequestBody Product product) {
         product.setProductId(UUID.randomUUID().toString());
         productService.saveProduct(product);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity.ok().body(product);
     }
 
+    @ExceptionHandler
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public String handleException(MethodArgumentNotValidException exception) {
+        return exception.getFieldError().toString();
+    }
 
     /**
      * Edit product in database.
-     *
      */
     @PutMapping(value = "/product")
     public ResponseEntity<Void> edit(@RequestBody Product product) {
-        if(!productService.checkIfExist(product.getId()))
+        if (!productService.checkIfExist(product.getId()))
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         else {
             productService.saveProduct(product);
@@ -82,19 +84,28 @@ public class ProductController {
     }
 
     /**
-     * Delete product by its id.
-     *
+     * Delete product by its id and redirect
      */
     @DeleteMapping(value = "/product/{id}")
     public RedirectView delete(@PathVariable Integer id) {
         productService.deleteProduct(id);
-        return new RedirectView("/products", true);
+        return new RedirectView("/api/productsList", true);
+    }
+
+    /**
+     * Redirect endpoint
+     *
+     * @return
+     */
+    @ApiIgnore
+    @RequestMapping(value = "/productsList")
+    public Iterable<Product> redirect() {
+        return productService.listAllProducts();
     }
 
     @DeleteMapping(value = "/products/{id}")
     public ResponseEntity deleteBadRequest(@PathVariable Integer id) {
         return new ResponseEntity(HttpStatus.FORBIDDEN);
     }
-
 
 }

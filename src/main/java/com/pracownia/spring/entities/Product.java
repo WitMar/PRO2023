@@ -1,5 +1,7 @@
 package com.pracownia.spring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
@@ -11,8 +13,8 @@ import java.util.Set;
  * Product entity.
  */
 @Entity
-//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,
-//        property="refId", scope=Product.class)
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class,
+        property="refId", scope=Product.class)
 public class Product {
 
     @Id

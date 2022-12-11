@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-//@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class,
-//        property="refSelId", scope=Seller.class)
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class,
+        property="refSelId", scope=Seller.class)
 public class Seller {
 
     @Id
