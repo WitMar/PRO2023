@@ -1,5 +1,6 @@
 package com.pracownia.spring.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Product {
     private BigDecimal price;
 
     @Column(length = 1000)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSZ")
     private DateTime bestBeforeDate;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
