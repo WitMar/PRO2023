@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import Todo from "../Todo/Todo";
 import axios from 'axios';
 
@@ -7,18 +6,17 @@ import axios from 'axios';
 class TodoList extends React.Component {
     constructor(props) {
         super(props);
-        let t1 = { id : 0, value : "Learn React", done : true };
-        let t2 = { id : 1, value : "Pass Programming Laboratory", done : false };
-        let t3 = { id : 2, value : "Have a nice holiday", done : false };
-        this.state = { todosList: [t1, t2, t3] };
+        this.state = { todosList: [] };
         this.addTodo = this.addTodo.bind(this);
-        this.counter = 2;
     };
 
 
     addTodo = () => {
-        this.counter++;
-        let newelement = {id: this.counter, value: this.state.newTodo, done: false};
+        let nextId = this.state.todosList.map(a => { return a.id }).reduce((acc, val) => {
+            return acc > val ? acc : val;
+        });
+        nextId++;
+        let newelement = {id: nextId, value: this.state.newTodo, done: false};
         this.setState(prevState => ({
             todosList: [...prevState.todosList, newelement],
             newTodo: ""
@@ -28,6 +26,7 @@ class TodoList extends React.Component {
     handleRemove = id => {
         let object = this.state.todosList.find(function (item) {
             if(item.id === id) return item;
+            return null;
         });
         let arrAfterDel = this.state.todosList.filter(function (item) {
             return item.id !== id
@@ -55,6 +54,7 @@ class TodoList extends React.Component {
 
         let object = arrAfterUpdate.find(function (item) {
             if(item.id === id) return item;
+            return null;
         });
 
         this.setState({todosList: arrAfterUpdate}, () => axios.put(`http://localhost:8080/todos/${object.id}`, object));
@@ -70,7 +70,7 @@ class TodoList extends React.Component {
             return (<tr key={todo.id}>
                 <Todo value={todo.value}
                       done={todo.done}
-                      id = {todo.id}
+                      id={todo.id}
                       update={(id, done) => this.updateChild(id, done)}  />
                 <th>
                     <button type="button" onClick={() => this.handleRemove(todo.id)}>
@@ -97,6 +97,7 @@ class TodoList extends React.Component {
                 <input
                     type='text'
                     onChange={this.myChangeHandler}
+                    value={this.state.newTodo}
                 />
                 <button onClick={this.addTodo}>
                     AddTodo
